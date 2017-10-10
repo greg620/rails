@@ -1,0 +1,10 @@
+<h2><%= @article.title %></h2>
+<% if current_user %>
+  <% if user_current.id == @article.user_id %>
+    <%= link_to 'Editer', edit_article_path %>
+  <% end %>
+<% end %>
+
+<div class="content">
+  <%= Markdown.new(@article.content).to_html.html_safe %>
+</div>

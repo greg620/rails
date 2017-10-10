@@ -1,0 +1,36 @@
+<h2 class="pull-left">Brouillon</h2>
+<div class="pull-right">
+  <%= link_to 'Ajouter un brouillon', new_article_path, {:class => 'btn btn-success'} %>
+</div>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Titre de l'article</th>
+      <th></th>
+      <th>Publié</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @draft.each do |draft| %>
+      <tr>
+        <td><%= draft.title %></td>
+        <td>
+          <%= link_to 'Editer', edit_article_path(draft.id) %>
+          <% if draft.published == 1 %>
+             - <%= link_to 'Voir', article_path(draft.slug, draft.id) %>
+          <% end %>
+          - <%= link_to 'Supprimer', delete_article_path(draft), method: :delete, data: {confirm: 'Vous êtes sur ?'} %>
+        </td>
+        <td>
+          <% if draft.published == 1 %>
+            <div class="text-success">Oui</div>
+          <% else %>
+            <div class="text-danger">Non</div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tr>
+  </tbody>
+</table>
